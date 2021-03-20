@@ -38,12 +38,12 @@ h1 =  plot(pd(1:end,2),pd(1:end,1),'--','LineWidth',0.2,'Color','b');
 %     plot(pd22(1:i,2),pd22(1:i,1),'-','LineWidth',0.2,'Color',[10,10,0]/255);
 %     plot(pd33(1:i,2),pd33(1:i,1),'-','LineWidth',0.2,'Color',[200,10,10]/255);
     
- h2 =   plot(pd(i,2),pd(i,1),'r--*','MarkerSize',20);
+ h2 =   plot(pd(i,2),pd(i,1),'r*','MarkerSize',20);
 %     T=x_path(i,9:10);
 %     N=x_path(i,11:12);
 %     arrow3([pd(i,2),pd(i,1)],[pd(i,2)+5*T(2),pd(i,1)+5*T(1)]);
 %     arrow3([pd(i,2),pd(i,1)],[pd(i,2)+5*N(2),pd(i,1)+5*N(1)]);
- h3 =  plot(p(1:i,2),p(1:i,1),'.-','LineWidth',0.5,'Color',[10,10,0]/255);
+ h3 =  plot(p(1:i,2),p(1:i,1),'-','LineWidth',0.5,'Color',[10,10,0]/255);
    
 %     plot(p22(1:i,2),p22(1:i,1),'-','LineWidth',0.2,'Color',[10,10,0]/255);
 %     plot(p33(1:i,2),p33(1:i,1),'-','LineWidth',0.2,'Color',[200,10,10]/255);
@@ -56,8 +56,9 @@ h1 =  plot(pd(1:end,2),pd(1:end,1),'--','LineWidth',0.2,'Color','b');
    
 %     GTF_Simulink_PlotAUV([p22(i,2),p22(i,1),0], [0,0,yaw2_22(i)], Scale, 0,AUV_COL22,1);  
 %     GTF_Simulink_PlotAUV([p33(i,2),p33(i,1),0], [0,0,yaw3_33(i)], Scale, 0,AUV_COL33,1);  
- legend([h1,h2,h3],'Desired path', 'Reference point to track','Vehicle trajectory');   
-if (i==100)
+ led = legend([h1,h2,h3],'Desired path', 'Reference point to track','Vehicle trajectory');   
+led.FontSize = 14;
+ if (i==100)
     hello=0;
 end
 
