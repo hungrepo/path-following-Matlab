@@ -1,7 +1,7 @@
 % ================================================================================
 % This is path following toolbox for testing path following algorithms in 2D cases
 % ================================================================================
-%    Details of the algorithm are described in the paper entittled:
+%    Details of the algorithms are described in the paper entittled:
 %     
 %       Theory, simulations, and experiments of path following guidance strategies for autonomous vehicles: Part I 
 %    
