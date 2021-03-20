@@ -26,7 +26,7 @@ function PFtools
         x_robot0 = [p0;psi0];                                                                       % Robot state
     % Initialize the path 
         gamma0 = 0.1;                                                                                 % 
-        pathtype = 'Lawnmover';                                                                       % path types includes : {Sin, circle, Polynominal,Bernoulli, Lawnmover, Heart}    
+        pathtype = 'Bernoulli';                                                                       % path types includes : {Sin, circle, Polynominal,Bernoulli, Lawnmover, Heart}    
         [pd,d_pd,dd_pd,vd] = path_eq(pathtype);                                                     %                                                                  
     % Setup PF controller
         controller = 'Method 1';                                                                      % Controller {Method 1-Method 7}
