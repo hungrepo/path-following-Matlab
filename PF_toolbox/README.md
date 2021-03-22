@@ -13,9 +13,11 @@ Link:
 
 ## Installation:
 
-Step 1: Chose a foder that you want to locate your project, then run 
+Step 1: Chose a folder that you want to locate your project, then run 
 
 - clone/download the project
 - run PFtools.m and see the result.
 
- If you want to test the type of the path or controller, change path_type and controller in PFtools.m
+ If you want to test different type of the path or controller, change parameters in variable "path_type" and "controller" in PFtools.m
+
+ ## Citation
