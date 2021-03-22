@@ -23,17 +23,17 @@ function PFtools
     t=0;
     % Initialize vehicle_position and orientation
         p0 = [25;-15]; psi0 = pi/2;
-        x_robot0 = [p0;psi0];                                                                       % Robot state
+        x_robot0 = [p0;psi0];                                                                   % Robot state
     % Initialize the path 
         gamma0 = 0.1;                                                                                 % 
-        pathtype = 'sin';                                                                       % path types includes : {Sin, circle, Polynominal,Bernoulli, Lawnmover, Heart}    
+        pathtype = 'Bernoulli';                                                                       % path types includes : {Sin, circle, polynominal,Bernoulli, Lawnmover, Heart}    
         [pd,d_pd,dd_pd,vd] = path_eq(pathtype);                                                     %                                                                  
     % Setup PF controller
-        controller = 'Method 1';                                                                      % Controller {Method 1-Method 7}
+        controller = 'Method 1';                                                                % Controller {Method 1-Method 7}
     % Setup constraint for the vehicle input (speed and heading rate)
         umin = 0;     umax = 1;                         
         rmin = -0.2;  rmax = 0.2;
-        vmin = -0.1;  vmax = 0.1;     
+        vmin = -1;  vmax = 1;     
         l_bound = [umin;rmin;vmin];  u_bound = [umax;rmax;vmax];                             
     if strcmp(controller,'Method 5')||strcmp(controller,'Method 7')  
         MPC_PF = MPC_setup(Ts,d_pd,dd_pd,l_bound,u_bound,vd,controller);                              % Initilize an MPC object

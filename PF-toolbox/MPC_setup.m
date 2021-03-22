@@ -1,6 +1,6 @@
 function MPC_PFC=MPC_setup(Ts,d_pd,dd_pd,l_bound,u_bound,vd,controller)
     import casadi.*
-    N = 5;                      % number of control intervals
+    N = 10;                      % number of control intervals
     gamma=SX.sym('gamma');
     d_pd  = feval(d_pd,gamma);
     dd_pd = feval(dd_pd,gamma);
@@ -42,7 +42,7 @@ xdot = [vd*hg*cos(psie)-v_g*hg*(1-kappa*y1);...
     umin=[rmin;vmin];
     
 %% Objective term
-Q=diag([1 5 5]);
+Q=diag([1 5 .1]);
 R=diag([1 1]);
 ua=[vd*cos(psie)-v_g ;
     r-kappa*hg*v_g];
@@ -182,9 +182,9 @@ xdot = [S*eB+Delta*[u_v;r]-RIB*d_pd*v_g;...
 umax=u_bound;
 umin=l_bound;
 %% Objective term
-Q=diag([1 1]);
-R=diag([1 1]);
-ub=Delta*[u_v;r]-RIB*d_pd*v_g;
+Q = diag([1 .5]);
+R = diag([10 10]);
+ub = Delta*[u_v;r]-RIB*d_pd*v_g;
 L = eB'*Q*eB+ub'*R*ub+1*(v_g-vd)^2;
 %% Continuous time dynamics
 f = Function('f', {x, u}, {xdot, L});
