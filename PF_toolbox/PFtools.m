@@ -22,7 +22,7 @@ function PFtools
     N=T/Ts;
     t=0;
     % Initialize vehicle_position and orientation
-        p0 = [15;-5]; psi0 = pi/2;
+        p0 = [25;-15]; psi0 = pi/2;
         x_robot0 = [p0;psi0];                                                                       % Robot state
     % Initialize the path 
         gamma0 = 0.1;                                                                                 % 
