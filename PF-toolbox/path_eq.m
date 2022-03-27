@@ -45,8 +45,10 @@ syms t;                                             % We use t instead of for th
         end
         if strcmp(pathtype,'Heart');
             vd = 0.02;
-            pd = [16*sin(t)^3;
-                  13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t)];
+            x_offset = 20;
+            y_offset = -20;
+            pd = [16*sin(t)^3 + x_offset ;
+                  13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t) + y_offset];
         end     
    d_pd  = diff(pd) ;                          % partial derivative of pd respect to t 
    dd_pd = diff(d_pd);                         % partial  

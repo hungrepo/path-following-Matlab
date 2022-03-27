@@ -8,14 +8,14 @@ function MPC_PFC=MPC_setup(Ts,d_pd,dd_pd,l_bound,u_bound,vd,controller)
     kappa=(d_pd(1)*dd_pd(2)-d_pd(2)*dd_pd(1))/hg^3; 
 
     if (strcmp(controller,'Method 5'))
-        MPC_PFC=NLP1(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N);
+        MPC_PFC=NLP_Method5(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N);
     end
     if (strcmp(controller,'Method 7'))
-        MPC_PFC=NLP2(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N);
+        MPC_PFC=NLP_Method7(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N);
     end
 end
 
-function  MPC_PFC=NLP1(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N)
+function  MPC_PFC = NLP_Method5(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N)
     import casadi.*
     T = Ts*N;                       % Time horizon
     % system state
@@ -149,7 +149,7 @@ MPC_PFC.ubg=ubg;
 %     w0(6*i-1:6*i)=u0;
 % end
 end
-function  MPC_PFC=NLP2(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N)
+function  MPC_PFC = NLP_Method7(Ts,d_pd,dd_pd,hg,kappa,gamma,l_bound,u_bound,vd,N)
 import casadi.*
 T = Ts*N; % Time horizon
 % state of the path following system

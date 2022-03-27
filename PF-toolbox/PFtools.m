@@ -3,15 +3,15 @@
 % ================================================================================
 %    Details of the algorithms are described in the paper entittled:
 %     
-%       Theory, simulations, and experiments of path following guidance strategies for autonomous vehicles: Part I 
+%       A review of path following control strategies for autonomous robotic vehicles: theory, simulations, and experiments
 %    
-%    Download at: http: ...
+%    Authors: Nguyen Hung, Francisco Rego, Joao Quintas, Joao Cruz, Marcelo Jacinto, David Souto, André Potes, Luis Sebastião and António Pascoal 
+
+% The code was written by: Nguyen Hung  
+% See more the work: https://nt-hung.github.io/
 %
-% Developed by: Nguyen T. Hung - IST Lisbon 
-% Contact: https://nt-hung.github.io/
 %
-%
-%==========================================================================
+%=================================================================================
 
 function PFtools
     clear all;
@@ -24,12 +24,12 @@ function PFtools
     % Initialize vehicle_position and orientation
         p0 = [25;-15]; psi0 = pi/2;
         x_robot0 = [p0;psi0];                                                                   % Robot state
-    % Initialize the path 
-        gamma0 = 0.1;                                                                                 % 
-        pathtype = 'Bernoulli';                                                                       % path types includes : {Sin, circle, polynominal,Bernoulli, Lawnmover, Heart}    
-        [pd,d_pd,dd_pd,vd] = path_eq(pathtype);                                                     %                                                                  
-    % Setup PF controller
-        controller = 'Method 1';                                                                % Controller {Method 1-Method 7}
+    % Set the path 
+        gamma0 = 0.1;                                                                                % 
+        path_type = 'Bernoulli';                                                                       % path types includes : {Sin, circle, polynominal,Bernoulli, Lawnmover, Heart}    
+        [pd,d_pd,dd_pd,vd] = path_eq(path_type);                                                     %                                                                  
+    % Set PF controller
+        controller = 'Method 3';                                                                % Controller {Method 1-Method 7}
     % Setup constraint for the vehicle input (speed and heading rate)
         umin = 0;     umax = 1;                         
         rmin = -0.2;  rmax = 0.2;
@@ -78,14 +78,15 @@ end
 %% Run animation
     pd = x_path(:,1:2);
     p = x_robot(:,1:2);
-    animation_1vehicles
+%    animation_1vehicles
+    plot_results;
 end
 % End main loop ===========================================================
 
 %% Vehicle kinematics_models
 function dx = vehicle_model_2D_Type1(t,x,u)
 %   In this model, input includes the vehicle speed and heading rate.
-%   it is used for testing Method 1,2,5,6,7 
+%   it is used for testing Methods 1,2,5,6,7 
     psi = x(3);
     ur = u(1);
     r = u(2);
@@ -93,7 +94,7 @@ function dx = vehicle_model_2D_Type1(t,x,u)
 end
 function dx = vehicle_model_2D_Type2(t,x,u)
 %   In this model, input includes the vehicle speed and heading. 
-%   it is used for testing Method 1,2,5,6,7
+%   it is used for testing Methods 3,4
     psi = u(2);
     ur = u(1);
     dx = [ur*cos(psi);ur*sin(psi)];
