@@ -29,7 +29,7 @@ function PFtools
         path_type = 'Bernoulli';                                                                       % path types includes : {Sin, circle, polynominal,Bernoulli, Lawnmover, Heart}    
         [pd,d_pd,dd_pd,vd] = path_eq(path_type);                                                     %                                                                  
     % Set PF controller
-        controller = 'Method 3';                                                                % Controller {Method 1-Method 7}
+        controller = 'Method 1';                                                                % Controller {Method 1-Method 7}
     % Setup constraint for the vehicle input (speed and heading rate)
         umin = 0;     umax = 1;                         
         rmin = -0.2;  rmax = 0.2;
@@ -78,8 +78,8 @@ end
 %% Run animation
     pd = x_path(:,1:2);
     p = x_robot(:,1:2);
-%    animation_1vehicles
-    plot_results;
+    animation_1vehicles
+%    plot_results;
 end
 % End main loop ===========================================================
 

@@ -28,7 +28,7 @@ AUV_COL33= [0.9 0.2 0];
 yaw=x_robot(:,3)*180/pi;
 %yaw=90-yaw;
 
-for i=1:10:size(pd,1)%data.i,
+for i=1:10:500%data.i,
     
     hold off
     figure(fig1);

@@ -169,7 +169,7 @@ nu=length(u);
 S=[0 -r;
    r 0];
 
-delta=-0.5;
+delta=-0.2;
 Delta= [1    0;
         0   -delta];
 RIB=[ cos(psi) sin(psi)
@@ -182,7 +182,7 @@ xdot = [S*eB+Delta*[u_v;r]-RIB*d_pd*v_g;...
 umax=u_bound;
 umin=l_bound;
 %% Objective term
-Q = diag([1 .5]);
+Q = diag([.5 .2]);
 R = diag([10 10]);
 ub = Delta*[u_v;r]-RIB*d_pd*v_g;
 L = eB'*Q*eB+ub'*R*ub+1*(v_g-vd)^2;

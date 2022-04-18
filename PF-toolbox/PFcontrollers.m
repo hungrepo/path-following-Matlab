@@ -194,11 +194,12 @@ function upf= Method6(p,psi,pd,pd_gamma,psiP,kappa,v_robot,hg,vd,Ts)
     e_gamma=gamma_dot_old-vd;
 
     %%% PF control law
-    ud=Delta_inv*(-Kk*e_pos+RB_I'*pd_gamma*vd); 
+    ud=Delta_inv*(-tanh(Kk*e_pos)+RB_I'*pd_gamma*vd); 
     gamma_ddot=-kz*e_gamma+e_pos'*RB_I'*pd_gamma;
     %%% 
-    gamma_ddot=sat(gamma_ddot, -0.01, 0.01);
+    gamma_ddot=sat(gamma_ddot, -0.005, 0.005);
     gamma_dot=gamma_dot_old+Ts*gamma_ddot;
+    gamma_dot=sat(gamma_dot, -0.005, 0.2);
     gamma_dot_old=gamma_dot;
     upf=[ud;gamma_dot];
 end
@@ -239,12 +240,12 @@ function [k1,k2,k3,k_delta,theta,Delta_h]=ConPara1()
 end
 function [delta,Delta_inv,epsilon,Kk,kz]=ConPara2()
 % Control parameters for Method 6 and Method 7
-    delta=-0.5;
+    delta=-0.2;
     Delta= [1    0;
             0  -delta];
     Delta_inv=inv(Delta);        
     epsilon=[delta; 0];        
-    kx=.2; ky=0.05;    
+    kx=.1; ky=0.05;    
     Kk=[kx 0;
         0  ky];
     kz=1;
