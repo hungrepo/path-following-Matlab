@@ -17,7 +17,7 @@ function PFtools
     clear all;
     close all;
 %% Initialization
-    T = 400;                                                                                        % Simulation time
+    T = 500;                                                                                        % Simulation time
     Ts = 0.2;                                                                                         % Sampling time
     N=T/Ts;
     t=0;
@@ -40,27 +40,31 @@ function PFtools
     else
         MPC_PF=[];
     end
-% Start main Loop =========================================================
+%% Start main Loop =========================================================
     x_robot = x_robot0;
     x_path = [];
     upf = [0;0;0];                                                                                    % upf={u,r,v_gamma}
     gamma = gamma0;
+    compute_time = [];
+    path_compute_time = [];
 for i = 1:N
     t = [t;i*Ts];
 % Step 1: Get the state of the path
     p = x_robot(1:2,end);
+    tic 
     x_path(:,end+1) = path_state(pd,d_pd,dd_pd,controller,gamma(end),p);
-% Step 2: Compute path following controller    
-    upfi = PFcontrollers(x_robot(:,end),x_path(:,end),upf(:,end),controller,vd,Ts,MPC_PF,l_bound,u_bound);
+    path_compute_time(i+1) = toc;
+% Step 2: Compute path following controller   
+    [upfi exc_time] = PFcontrollers(x_robot(:,end),x_path(:,end),upf(:,end),controller,vd,Ts,MPC_PF,l_bound,u_bound);
+    compute_time(i+1) = exc_time + path_compute_time(end) ;   
     u_robot = upfi(1:2);  
 % Step 3: Update the state of the vehicle    
     if (strcmp(controller,'Method 3'))||(strcmp(controller,'Method 4'))   
-        [time y] = ode45(@(t,y) vehicle_model_2D_Type2(t,y,u_robot), [0, Ts], x_robot(1:2,end));
-        x_robot(:,end+1) = [y(end,:)';u_robot(2)];
-    else    
-        [time y] = ode45(@(t,y) vehicle_model_2D_Type1(t,y,u_robot), [0, Ts], x_robot(:,end));
-        x_robot(:,end+1) = y(end,:)';
+        model_type = 'Type II';
+    else
+        model_type = 'Type I';
     end    
+    x_robot(:,end+1) = vehicle_models(x_robot(:,end),u_robot,model_type,Ts);
     u_gamma = upfi(3);
     upf = [upf upfi];
 % Step 4: Update the path parameter 
@@ -83,20 +87,4 @@ end
 end
 % End main loop ===========================================================
 
-%% Vehicle kinematics_models
-function dx = vehicle_model_2D_Type1(t,x,u)
-%   In this model, input includes the vehicle speed and heading rate.
-%   it is used for testing Methods 1,2,5,6,7 
-    psi = x(3);
-    ur = u(1);
-    r = u(2);
-    dx = [ur*cos(psi);ur*sin(psi);r];
-end
-function dx = vehicle_model_2D_Type2(t,x,u)
-%   In this model, input includes the vehicle speed and heading. 
-%   it is used for testing Methods 3,4
-    psi = u(2);
-    ur = u(1);
-    dx = [ur*cos(psi);ur*sin(psi)];
-end
 

@@ -1,4 +1,4 @@
-function upf=PFcontrollers(x_robot,x_path,upf,controller,vd,Ts,MPC_PF,l_bound,u_bound)
+function [upf,exc_time] = PFcontrollers(x_robot,x_path,upf,controller,vd,Ts,MPC_PF,l_bound,u_bound)
 
 p=x_robot(1:2);
 psi=x_robot(3);
@@ -12,23 +12,56 @@ kappa=x_path(5);
 gamma=x_path(end);
 %% Compute PF error 
 if  strcmp(controller,'Method 1')     
+    
+    tic 
+
     upf=Method1(p,psi,pd,psiP,kappa,v_robot,hg,vd);
+    
+    exc_time = toc;
+    
     upf(2)=sat(upf(2),l_bound(2),u_bound(2));
+
+    
+    
 elseif strcmp(controller,'Method 2')     
+    tic 
+    
     upf=Method2(p,psi,pd,psiP,kappa,v_gamma,v_robot,hg,vd);
+    
+    exc_time = toc;
+    
     upf(2:3)=sat(upf(2:3),l_bound(2:3),u_bound(2:3));
+    
+
+
+    
 elseif strcmp(controller,'Method 3')   
+    tic
     upf=Method3(p,psi,pd,psiP,kappa,v_robot,hg,vd);
+    exc_time = toc;
+
 elseif strcmp(controller,'Method 4')   
+    tic
     upf=Method4(p,psi,pd,psiP,kappa,v_robot,hg,vd);
+    exc_time = toc;
+
     upf(3)=sat(upf(3),l_bound(3),u_bound(3));
-elseif strcmp(controller,'Method 5')   
+elseif strcmp(controller,'Method 5')  
+    tic
     upf=Method5(p,psi,pd,psiP,kappa,v_robot,hg,vd,gamma,MPC_PF);    
+    exc_time = toc;
+
 elseif strcmp(controller,'Method 6')
+    tic;
     upf=Method6(p,psi,pd,pd_gamma,psiP,kappa,v_robot,hg,vd,Ts);
-        upf=sat(upf,l_bound,u_bound);
+    
+    exc_time = toc;
+    
+    upf=sat(upf,l_bound,u_bound);
 elseif strcmp(controller,'Method 7')
+    tic
     upf= Method7(p,psi,pd,pd_gamma,psiP,vd,Ts,gamma,MPC_PF);        
+    exc_time = toc;
 end
 
 
