@@ -28,6 +28,6 @@ Hung N., Rego F., Quintas J., Cruz J., Jacinto M., Souto D. et al. (2022) A revi
 robotic vehicles: Theory, simulations, and experiments. Journal of Field Robotics, 1–33.
 https://doi.org/10.1002/rob.22142
 
-## Videos 
+  
 
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=XutfsXijHPE "")
+ 
