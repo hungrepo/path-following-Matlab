@@ -1,8 +1,8 @@
 # path-following-Matlab
 ## Description
-This repo contains matlab codes that implement the path following methods studied in the paper entitled:
+This repo contains Matlab codes that implement and animate the path following methods studied in the paper entitled:
 
-Nguyen Hung et al. A review of path following control strategies for autonomous robotic vehicles: theory, simulations, and experiments, 
+Nguyen Hung et al. A review of path following control strategies for autonomous robotic vehicles: theory, simulations, and experiments, Journal of Field Robotics, 2022.
 
 Link: https://nt-hung.github.io/files/pdf/research/JFR2022_preprint.pdf
 
@@ -27,3 +27,7 @@ If you find the code useful and would like to cite, please kindly reference to t
 Hung N., Rego F., Quintas J., Cruz J., Jacinto M., Souto D. et al. (2022) A review of path following control strategies for autonomous
 robotic vehicles: Theory, simulations, and experiments. Journal of Field Robotics, 1–33.
 https://doi.org/10.1002/rob.22142
+
+## Videos 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XutfsXijHPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
