@@ -17,9 +17,9 @@ Link: https://nt-hung.github.io/files/pdf/research/JFR2022_preprint.pdf
 
 If you want to test different type of the path or controller, just change parameters in variables "path_type" and "controller" in PFtools.m
 
-## Relevent ROS package
+## Relevant ROS package
 
-The path following methods also were implemented in the followng ROS package: https://github.com/dsor-isr/Paper-PathFollowingSurvey
+The path following methods were also implemented in the followng ROS package: https://github.com/dsor-isr/Paper-PathFollowingSurvey
 
 ## References 
 If you find the code useful and would like to cite, please kindly reference to the following paper:
